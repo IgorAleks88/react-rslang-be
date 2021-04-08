@@ -26,6 +26,15 @@ const save = async (wordId, userId, userWord) => {
   }
 };
 
+const saveMany = async userWords => {
+  const options = { ordered: false };
+  try {
+    return await UserWord.insertMany(userWords, options);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 const update = async (wordId, userId, userWord) => {
   const updatedWord = await UserWord.findOneAndUpdate(
     { wordId, userId },
@@ -41,4 +50,4 @@ const update = async (wordId, userId, userWord) => {
 
 const remove = async (wordId, userId) => UserWord.deleteOne({ wordId, userId });
 
-module.exports = { getAll, get, save, update, remove };
+module.exports = { getAll, get, save, saveMany, update, remove };

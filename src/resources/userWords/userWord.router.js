@@ -16,6 +16,17 @@ router.get('/:wordId', validator(wordId, 'params'), async (req, res) => {
 });
 
 router.post(
+  '/savemany',
+  // validator(wordId, 'params'),
+  // validator(userWord, 'body'),
+  async (req, res) => {
+    const word = await userWordService.saveMany(req.body);
+    console.log(word);
+    res.status(OK).send(word);
+  }
+);
+
+router.post(
   '/:wordId',
   validator(wordId, 'params'),
   validator(userWord, 'body'),
